@@ -1,7 +1,7 @@
 def tela_inicial():
     print("Olá, bem vindo ao sistema de gerenciamento do banco SIS!\n\n")
     print("Você gostaria de acessar qual funcionalidade?\n(1) Solicitar cartão\n(2) Gerenciar usuário\n(3) Configurar chave(PIX)\n")
-    painel()
+    # painel()
 
 def painel():
     selecao = int(input("Inserir funcionalidade, apenas digite o número indicado.\n"))
@@ -29,4 +29,4 @@ def painel():
     else:
         print("Insira uma opção válida.\n")
 
-tela_inicial()
+# tela_inicial()
