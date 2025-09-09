@@ -18,5 +18,15 @@ def painel():
         elif funcao == 2:
             endereco = input("Insira o endereço: ")
             print(f'O endereço atualizado é: {endereco}')
+    elif selecao == 3:
+        funcao = int(input(("Qual chave você gostaria de configurar? (1) CPF \n(2) Email\n")))
+        if funcao == 1:
+            cpf = input("Insira seu CPF.")
+            print(f'Sua chave (CPF) = {cpf}')
+        elif funcao == 2:
+            email = input("Insira seu e-mail: ")
+            print(f'Sua chave (E-mail) = {email}')
+    else:
+        print("Insira uma opção válida.")
 
 tela_inicial()
