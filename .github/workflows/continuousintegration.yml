@@ -1,20 +1,26 @@
-name: Continuous Delivery
+name: Continuous Integration
 
 on:
-  workflow_run:
-    workflows: ["Continuous Integration"]
-    types:
-      - completed
-    branches:
-      - main
+  push:
+    branches: ["main"]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
-      - name: Deploying to production...
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
         run: |
-          echo "✅ O workflow de CI foi um sucesso!"
-          echo "🚀 Iniciando a implementação do projeto..."
-          echo "🎉 Implementação finalizada!"
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Python script
+        run: python Formativa1.py
