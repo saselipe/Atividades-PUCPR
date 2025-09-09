@@ -27,6 +27,6 @@ def painel():
             email = input("Insira seu e-mail: \n")
             print(f'Sua chave (E-mail) = {email}\n')
     else:
-        print("Insira uma opção válida.")
+        print("Insira uma opção válida.\n")
 
 tela_inicial()
