@@ -50,6 +50,6 @@ jobs:
       - name: Send Commit Message to Discord
         uses: Sniddl/discord-commits@v1.6
         with:
-          webhook: ${ {secrets.DISCORD_ALARM }}
+          webhook: ${{secrets.DISCORD_ALARM}}
           template: "avatar_with_link"
           include-extras: true
