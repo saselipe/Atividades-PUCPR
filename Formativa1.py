@@ -6,7 +6,7 @@ def tela_inicial():
     print("Você gostaria de acessar qual funcionalidade?\n(1) Solicitar cartão\n(2) Gerenciar usuário\n(3) Configurar chave(PIX)\n")
 
 def painel():
-    selecao = 2 # Valor fixo para teste
+    selecao = 1 # Valor fixo para teste
 
     if selecao == 1:
         print("Você escolheu a solicitação de cartão!\nEm breve iremos te enviar a data de entrega do mesmo.")

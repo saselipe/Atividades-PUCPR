@@ -23,7 +23,7 @@ jobs:
         run: python Formativa1.py
 
   docker-build:
-    needs: build # Garante que esse job só rodará depois que o 'build' for concluído com sucesso
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do código
@@ -32,7 +32,7 @@ jobs:
       - name: Login no Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }} # Use secrets para segurança
+          username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Construir e enviar a imagem
@@ -40,4 +40,16 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/macarronada:latest # Substitua 'seu-projeto-python' pelo nome do seu projeto
+          tags: ${{ secrets.DOCKER_USERNAME }}/macarronada:latest
+
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Send Commit Message to Discord
+        uses: Sniddl/discord-commits@v1.6
+        with:
+          webhook: ${{secrets.DISCORD_ALARM}}
+          template: "avatar_with_link"
+          include-extras: true
