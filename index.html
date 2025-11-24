@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro e Guia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0078d4;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="email"], input[type="password"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005a9c;
+        }
+        /* Mensagens de validação e status de sucesso */
+        #mensagem {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #e6ffe6;
+            color: #008000;
+            border: 1px solid #008000;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* Área de Status de Crédito (Simulação) */
+        #statusArea {
+            display: none; /* Escondido por padrão */
+            margin-top: 20px; 
+            padding: 20px; 
+            border-radius: 8px; 
+            border: 2px solid #ffc107; /* Cor de atenção/crédito */
+            background-color: #fff9e6;
+            text-align: center;
+        }
+        #statusMensagem {
+            color: #e0a800; 
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        #statusArea p {
+            color: #333;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="titulo">Login - Pré seleção de crédito </h1>
+        
+        <!-- Área de Login -->
+        <div id="loginArea">
+            <form id="formMatricula">
+                <label for="email">E-mail de Cadastro</label>
+                <input type="email" id="email" required>
+
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" required>
+
+                <label for="curso">Escolha o Curso</label>
+                <select id="curso" required>
+                    <option value="" disabled selected>-- Selecione --</option>
+                    <option value="eng_software">Engenharia de Software</option>
+                    <option value="eng_computacao">Engenharia de Computação</option>
+                    <option value="ads">Análise e Desenvolvimento de Sistemas (ADS)</option>
+                </select>
+
+                <button type="submit">Analisar score e crédito</button>
+            </form>
+        </div>
+        
+        <div id="mensagem"></div>
+
+        <!-- Área de Status de Crédito (Simulação) -->
+        <div id="statusArea">
+             <p id="statusMensagem"></p>
+             <p>Aguarde o processamento dos dados...</p>
+        </div>
+
+    </div>
+
+    <script>
+        const formMatricula = document.getElementById('formMatricula');
+        const loginArea = document.getElementById('loginArea');
+        const mensagemDiv = document.getElementById('mensagem');
+        const statusArea = document.getElementById('statusArea');
+        const statusMensagem = document.getElementById('statusMensagem');
+        const titulo = document.getElementById('titulo');
+
+        // Função para mostrar a área de status de crédito
+        function solicitarCredito() {
+            // Esconde Login
+            loginArea.style.display = 'none';
+            mensagemDiv.style.display = 'none';
+            
+            // Muda o Título
+            titulo.textContent = 'Solicitação de Crédito (Etapa Final)';
+            
+            // Mostra e inicia a simulação de status
+            statusArea.style.display = 'block';
+
+            statusMensagem.innerHTML = 'Enviando dados para Análise de Crédito...';
+            
+            // Simula o tempo de processamento
+            setTimeout(() => {
+                statusMensagem.innerHTML = 'Solicitação de Crédito em Andamento - Seus dados foram enviados para avaliação. Aguarde e-mail com mais informações... ';
+            }, 3000);
+        }
+
+        // --- Ação de Login (Submeter Formulário) ---
+        formMatricula.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const curso = document.getElementById('curso').value;
+
+            if (!curso) {
+                // Mensagem de erro de validação
+                mensagemDiv.style.backgroundColor = '#ffe6e6';
+                mensagemDiv.style.color = '#cc0000';
+                mensagemDiv.style.border = '1px solid #cc0000';
+                mensagemDiv.innerHTML = '⚠️ Por favor, selecione um curso.';
+                mensagemDiv.style.display = 'block';
+                return;
+            }
+
+            // Ação de Login bem-sucedida
+            mensagemDiv.style.backgroundColor = '#e6ffe6';
+            mensagemDiv.style.color = '#008000';
+            mensagemDiv.style.border = '1px solid #008000';
+            mensagemDiv.innerHTML = `
+                Login e Curso Selecionado! Aguarde...
+            `;
+            mensagemDiv.style.display = 'block';
+            
+            // Inicia o processo de simulação de crédito após o login
+            setTimeout(solicitarCredito, 1500); // Dá um tempo para a mensagem de sucesso aparecer antes de mudar a tela.
+        });
+
+    </script>
+</body>
+</html>
