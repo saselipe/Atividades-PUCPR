@@ -38,7 +38,7 @@
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+            box-sizing: border-box;
         }
         button {
             width: 100%;
@@ -61,7 +61,7 @@
             background-color: #e6ffe6;
             color: #008000;
             border: 1px solid #008000;
-            display: none; /* Escondido inicialmente */
+            display: none;
         }
     </style>
 </head>
@@ -90,7 +90,7 @@
 
     <script>
         document.getElementById('formMatricula').addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
+            event.preventDefault();
 
             const email = document.getElementById('email').value;
             const curso = document.getElementById('curso').value;
@@ -105,29 +105,21 @@
                 return;
             }
 
-            // SIMULAÇÃO: Aqui ocorreria a chamada FETCH para o Azure Functions/API
-            const dadosEnviados = {
-                email: email,
-                curso_selecionado: curso,
-                // ... outros dados seriam enviados
-            };
-
-            // Exibe a mensagem de sucesso e o que aconteceria na arquitetura
+            // 1. Exibir mensagem de sucesso
             mensagemDiv.style.backgroundColor = '#e6ffe6';
             mensagemDiv.style.color = '#008000';
             mensagemDiv.style.border = '1px solid #008000';
             mensagemDiv.innerHTML = `
-                ✅ **Sucesso!** Dados enviados para a API (Azure Functions).<br>
-                Curso: **${curso}**.<br>
-                A API agora iniciará a validação de pagamento e documentação.
+                **Sucesso!** Login e curso selecionado.<br>
+                Próxima etapa: **Validação de Crédito/Contrato**.
             `;
             mensagemDiv.style.display = 'block';
             
-            // Simulação de navegação para a próxima tela após 3 segundos
+            // 2. REDIRECIONAMENTO AUTOMÁTICO APÓS 3 SEGUNDOS
             setTimeout(() => {
-                alert("Simulação: Próxima etapa (Validação de Crédito/Contrato).");
-                // Aqui você pode adicionar um código para redirecionar para a URL do seu segundo Static Web App, se desejar.
-            }, 3000);
+                // Redireciona para o arquivo de liberação de crédito
+                window.location.href = './liberacao_credito.html'; 
+            }, 3000); // 3000 milissegundos = 3 segundos
         });
     </script>
 </body>
