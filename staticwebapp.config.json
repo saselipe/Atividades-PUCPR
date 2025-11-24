@@ -2,11 +2,21 @@
   "routes": [
     {
       "route": "/",
-      "serve": "/liberacao_credito.html",
+      "serve": "/matricula.html",
+      "statusCode": 200
+    },
+    {
+      "route": "/liberacao/",
+      "serve": "/liberacao-credito.html",
+      "statusCode": 200
+    },
+    {
+      "route": "/paginacentral/",
+      "serve": "/arquivos_antigos/index.html",
       "statusCode": 200
     }
   ],
   "navigationFallback": {
-    "rewrite": "/liberacao_credito.html"
+    "rewrite": "/matricula.html"
   }
 }
