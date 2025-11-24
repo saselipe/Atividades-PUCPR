@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "serve": "/liberacao_credito.html",
+      "statusCode": 200
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/liberacao_credito.html"
+  }
+}
